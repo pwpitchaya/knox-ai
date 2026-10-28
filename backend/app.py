@@ -178,6 +178,10 @@ def initialize():
           id TEXT PRIMARY KEY, status TEXT NOT NULL, personnel TEXT NOT NULL,
           category TEXT NOT NULL, evidence_scope TEXT NOT NULL, source_count INTEGER NOT NULL,
           elapsed_ms INTEGER NOT NULL, created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP);
+        CREATE TABLE IF NOT EXISTS approval_log (
+          id TEXT PRIMARY KEY, document_id TEXT NOT NULL REFERENCES documents(id) ON DELETE CASCADE,
+          action TEXT NOT NULL, performed_by TEXT NOT NULL,
+          created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP);
         ''')
         columns = {row['name'] for row in db.execute('PRAGMA table_info(documents)')}
         if 'review_scope' not in columns:
@@ -363,7 +367,7 @@ def add_relationship(payload: Relationship):
 
 
 @app.patch('/api/documents/{identifier}/review')
-def review(identifier: str, payload: Review):
+def review(identifier: str, payload: Review, username: str = Depends(require_basic_auth)):
     with connect() as db:
         document = db.execute('SELECT * FROM documents WHERE id=?', (identifier,)).fetchone()
         if document is None:
@@ -373,7 +377,16 @@ def review(identifier: str, payload: Review):
         db.execute('UPDATE documents SET reviewed=?, review_scope=? WHERE id=?',
                    (int(payload.reviewed), 'user-confirmed extracted text' if payload.reviewed else 'pending', identifier))
         db.execute('DELETE FROM document_audits WHERE document_id=?',(identifier,))
+        db.execute('INSERT INTO approval_log(id,document_id,action,performed_by) VALUES(?,?,?,?)',
+                   (uuid.uuid4().hex, identifier, 'approve' if payload.reviewed else 'revoke', username))
     return {'reviewed': payload.reviewed}
+
+
+@app.get('/api/documents/{identifier}/approval-log')
+def document_approval_log(identifier: str):
+    with connect() as db:
+        return [dict(row) for row in db.execute(
+            'SELECT action, performed_by, created_at FROM approval_log WHERE document_id=? ORDER BY created_at DESC', (identifier,))]
 
 
 @app.get('/api/documents/{identifier}/excerpts')
@@ -541,6 +554,22 @@ def _generate_once(question, personnel, sources, as_of, repair=False, forbidden_
                     contextual.append(match.group(0));return re.sub(r'\d+(?:\.\d+)?','',match.group(0))
                 return match.group(0)
             clean=re.sub(tenure_pattern,omit_supplied_tenure,clean)
+            # Fallback: the tenure pattern requires specific Thai keywords in
+            # the answer.  When the AI echoes the user's duration with different
+            # wording (e.g. "เพียง 3 เดือน" instead of "เริ่มงาน 3 เดือน") those
+            # numbers survive the first pass.  Exempt any bare number+time-unit
+            # pair that appears identically in the question — the user stated
+            # it, so repeating it is not fabrication.
+            question_durations = {(m.group(1), m.group(2))
+                                 for m in re.finditer(r'(\d+(?:\.\d+)?)\s*(ปี|เดือน|วัน)',
+                                                      question.translate(digits))}
+            if question_durations:
+                def omit_question_duration(match):
+                    if (match.group(1), match.group(2)) in question_durations:
+                        contextual.append(match.group(0))
+                        return re.sub(r'\d+(?:\.\d+)?', '', match.group(0))
+                    return match.group(0)
+                clean = re.sub(r'(\d+(?:\.\d+)?)\s*(ปี|เดือน|วัน)', omit_question_duration, clean)
             if contextual:parsed['context_from_question']=contextual
             cited_text = ' '.join(s['text']+' '+s.get('title','')+' '+str(s.get('effective_from',''))
                                   for s in sources if s['citation'] in citations).translate(digits)
