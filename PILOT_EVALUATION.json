@@ -1,0 +1,243 @@
+{
+  "corpus": "actual visually checked pilot excerpts",
+  "generation_configured": false,
+  "generation_note": "Live answers not evaluated unless a usable API key and model are configured.",
+  "cases": [
+    {
+      "question": "ลาป่วยตั้งแต่กี่วันต้องมีใบรับรองแพทย์",
+      "expected_phrase": "ใบรับรองแพทย์",
+      "expected_page": 3,
+      "retrieval_hit_at_6": true,
+      "status": "retrieval_only",
+      "retrieval": "keyword-tfidf",
+      "version_audit": [
+        {
+          "older_id": "d06aba4fc7d34515aa6b109eabd6b071",
+          "newer_id": "440f7f8feffa40cbad53aa930282461d",
+          "effective_from": "2022-10-27",
+          "evidence_excerpt": "ข้อ ๓ ให้ยกเลิก ประกาศคณะกรรมการบริหารงานบุคคล ประจำมหาวิทยาลัยขอนแก่น (ฉบับที่ ๒/๒๕๕๙) เรื่อง วัน เวลาปฏิบัติงาน การลา และการได้รับเงินเดือนระหว่างลาของพนักงานมหาวิทยาลัย",
+          "source_url": "https://hr.kku.ac.th/wphrdkku/wp-content/uploads/2022/10/ประกาศ-ก.บ.ม.-6-2565-ปฏิบัติงาน-การลา-พนักงานฯ-1.pdf",
+          "pdf_page": 1
+        }
+      ],
+      "source_pages": [
+        3,
+        3,
+        3,
+        3,
+        4
+      ]
+    },
+    {
+      "question": "ลาป่วยได้รับเงินเดือนระหว่างลากี่วัน",
+      "expected_phrase": "๖๐ วันทำการ",
+      "expected_page": 3,
+      "retrieval_hit_at_6": true,
+      "status": "retrieval_only",
+      "retrieval": "keyword-tfidf",
+      "version_audit": [
+        {
+          "older_id": "d06aba4fc7d34515aa6b109eabd6b071",
+          "newer_id": "440f7f8feffa40cbad53aa930282461d",
+          "effective_from": "2022-10-27",
+          "evidence_excerpt": "ข้อ ๓ ให้ยกเลิก ประกาศคณะกรรมการบริหารงานบุคคล ประจำมหาวิทยาลัยขอนแก่น (ฉบับที่ ๒/๒๕๕๙) เรื่อง วัน เวลาปฏิบัติงาน การลา และการได้รับเงินเดือนระหว่างลาของพนักงานมหาวิทยาลัย",
+          "source_url": "https://hr.kku.ac.th/wphrdkku/wp-content/uploads/2022/10/ประกาศ-ก.บ.ม.-6-2565-ปฏิบัติงาน-การลา-พนักงานฯ-1.pdf",
+          "pdf_page": 1
+        }
+      ],
+      "source_pages": [
+        3,
+        4,
+        1,
+        3,
+        3
+      ]
+    },
+    {
+      "question": "เริ่มงานไม่ถึง 6 เดือน ลาป่วยได้เงินเดือนกี่วัน",
+      "expected_phrase": "๓๐ วันทำการ",
+      "expected_page": 3,
+      "retrieval_hit_at_6": true,
+      "status": "retrieval_only",
+      "retrieval": "keyword-tfidf",
+      "version_audit": [
+        {
+          "older_id": "d06aba4fc7d34515aa6b109eabd6b071",
+          "newer_id": "440f7f8feffa40cbad53aa930282461d",
+          "effective_from": "2022-10-27",
+          "evidence_excerpt": "ข้อ ๓ ให้ยกเลิก ประกาศคณะกรรมการบริหารงานบุคคล ประจำมหาวิทยาลัยขอนแก่น (ฉบับที่ ๒/๒๕๕๙) เรื่อง วัน เวลาปฏิบัติงาน การลา และการได้รับเงินเดือนระหว่างลาของพนักงานมหาวิทยาลัย",
+          "source_url": "https://hr.kku.ac.th/wphrdkku/wp-content/uploads/2022/10/ประกาศ-ก.บ.ม.-6-2565-ปฏิบัติงาน-การลา-พนักงานฯ-1.pdf",
+          "pdf_page": 1
+        }
+      ],
+      "source_pages": [
+        3,
+        4,
+        3,
+        1,
+        3
+      ]
+    },
+    {
+      "question": "ลากิจส่วนตัวปีแรกได้รับเงินเดือนกี่วัน",
+      "expected_phrase": "๑๕ วันทำการ",
+      "expected_page": 4,
+      "retrieval_hit_at_6": true,
+      "status": "retrieval_only",
+      "retrieval": "keyword-tfidf",
+      "version_audit": [
+        {
+          "older_id": "d06aba4fc7d34515aa6b109eabd6b071",
+          "newer_id": "440f7f8feffa40cbad53aa930282461d",
+          "effective_from": "2022-10-27",
+          "evidence_excerpt": "ข้อ ๓ ให้ยกเลิก ประกาศคณะกรรมการบริหารงานบุคคล ประจำมหาวิทยาลัยขอนแก่น (ฉบับที่ ๒/๒๕๕๙) เรื่อง วัน เวลาปฏิบัติงาน การลา และการได้รับเงินเดือนระหว่างลาของพนักงานมหาวิทยาลัย",
+          "source_url": "https://hr.kku.ac.th/wphrdkku/wp-content/uploads/2022/10/ประกาศ-ก.บ.ม.-6-2565-ปฏิบัติงาน-การลา-พนักงานฯ-1.pdf",
+          "pdf_page": 1
+        }
+      ],
+      "source_pages": [
+        4,
+        3,
+        3,
+        4,
+        1,
+        4
+      ]
+    },
+    {
+      "question": "ลากิจส่วนตัวปีงบประมาณหนึ่งได้กี่วัน",
+      "expected_phrase": "๔๕ วันทำการ",
+      "expected_page": 4,
+      "retrieval_hit_at_6": true,
+      "status": "retrieval_only",
+      "retrieval": "keyword-tfidf",
+      "version_audit": [
+        {
+          "older_id": "d06aba4fc7d34515aa6b109eabd6b071",
+          "newer_id": "440f7f8feffa40cbad53aa930282461d",
+          "effective_from": "2022-10-27",
+          "evidence_excerpt": "ข้อ ๓ ให้ยกเลิก ประกาศคณะกรรมการบริหารงานบุคคล ประจำมหาวิทยาลัยขอนแก่น (ฉบับที่ ๒/๒๕๕๙) เรื่อง วัน เวลาปฏิบัติงาน การลา และการได้รับเงินเดือนระหว่างลาของพนักงานมหาวิทยาลัย",
+          "source_url": "https://hr.kku.ac.th/wphrdkku/wp-content/uploads/2022/10/ประกาศ-ก.บ.ม.-6-2565-ปฏิบัติงาน-การลา-พนักงานฯ-1.pdf",
+          "pdf_page": 1
+        }
+      ],
+      "source_pages": [
+        4,
+        4,
+        4,
+        3
+      ]
+    },
+    {
+      "question": "ลาพักผ่อนสะสมได้กี่วัน",
+      "expected_phrase": "๒๐ วันทำการ",
+      "expected_page": 4,
+      "retrieval_hit_at_6": true,
+      "status": "retrieval_only",
+      "retrieval": "keyword-tfidf",
+      "version_audit": [
+        {
+          "older_id": "d06aba4fc7d34515aa6b109eabd6b071",
+          "newer_id": "440f7f8feffa40cbad53aa930282461d",
+          "effective_from": "2022-10-27",
+          "evidence_excerpt": "ข้อ ๓ ให้ยกเลิก ประกาศคณะกรรมการบริหารงานบุคคล ประจำมหาวิทยาลัยขอนแก่น (ฉบับที่ ๒/๒๕๕๙) เรื่อง วัน เวลาปฏิบัติงาน การลา และการได้รับเงินเดือนระหว่างลาของพนักงานมหาวิทยาลัย",
+          "source_url": "https://hr.kku.ac.th/wphrdkku/wp-content/uploads/2022/10/ประกาศ-ก.บ.ม.-6-2565-ปฏิบัติงาน-การลา-พนักงานฯ-1.pdf",
+          "pdf_page": 1
+        }
+      ],
+      "source_pages": [
+        4
+      ]
+    },
+    {
+      "question": "ลาคลอดบุตรได้รับเงินเดือนกี่วัน",
+      "expected_phrase": "๙๘ วัน",
+      "expected_page": 3,
+      "retrieval_hit_at_6": true,
+      "status": "retrieval_only",
+      "retrieval": "keyword-tfidf",
+      "version_audit": [
+        {
+          "older_id": "d06aba4fc7d34515aa6b109eabd6b071",
+          "newer_id": "440f7f8feffa40cbad53aa930282461d",
+          "effective_from": "2022-10-27",
+          "evidence_excerpt": "ข้อ ๓ ให้ยกเลิก ประกาศคณะกรรมการบริหารงานบุคคล ประจำมหาวิทยาลัยขอนแก่น (ฉบับที่ ๒/๒๕๕๙) เรื่อง วัน เวลาปฏิบัติงาน การลา และการได้รับเงินเดือนระหว่างลาของพนักงานมหาวิทยาลัย",
+          "source_url": "https://hr.kku.ac.th/wphrdkku/wp-content/uploads/2022/10/ประกาศ-ก.บ.ม.-6-2565-ปฏิบัติงาน-การลา-พนักงานฯ-1.pdf",
+          "pdf_page": 1
+        }
+      ],
+      "source_pages": [
+        3,
+        4,
+        3,
+        4,
+        1
+      ]
+    },
+    {
+      "question": "ลาไปช่วยเหลือภริยาคลอดบุตรต้องแนบเอกสารอะไร",
+      "expected_phrase": "ใบสูติบัตร",
+      "expected_page": 4,
+      "retrieval_hit_at_6": true,
+      "status": "retrieval_only",
+      "retrieval": "keyword-tfidf",
+      "version_audit": [
+        {
+          "older_id": "d06aba4fc7d34515aa6b109eabd6b071",
+          "newer_id": "440f7f8feffa40cbad53aa930282461d",
+          "effective_from": "2022-10-27",
+          "evidence_excerpt": "ข้อ ๓ ให้ยกเลิก ประกาศคณะกรรมการบริหารงานบุคคล ประจำมหาวิทยาลัยขอนแก่น (ฉบับที่ ๒/๒๕๕๙) เรื่อง วัน เวลาปฏิบัติงาน การลา และการได้รับเงินเดือนระหว่างลาของพนักงานมหาวิทยาลัย",
+          "source_url": "https://hr.kku.ac.th/wphrdkku/wp-content/uploads/2022/10/ประกาศ-ก.บ.ม.-6-2565-ปฏิบัติงาน-การลา-พนักงานฯ-1.pdf",
+          "pdf_page": 1
+        }
+      ],
+      "source_pages": [
+        4,
+        3
+      ]
+    },
+    {
+      "question": "รถส่วนตัวไปราชการต้องขออนุมัติก่อนไหม",
+      "expected_phrase": "ได้รับอนุมัติ",
+      "expected_page": 4,
+      "retrieval_hit_at_6": true,
+      "status": "retrieval_only",
+      "retrieval": "keyword-tfidf",
+      "version_audit": [],
+      "source_pages": [
+        4,
+        5,
+        5
+      ]
+    },
+    {
+      "question": "รถยนต์ส่วนบุคคลเบิกกิโลเมตรละเท่าไหร่",
+      "expected_phrase": "กิโลเมตรละ 4 บาท",
+      "expected_page": 5,
+      "retrieval_hit_at_6": true,
+      "status": "retrieval_only",
+      "retrieval": "keyword-tfidf",
+      "version_audit": [],
+      "source_pages": [
+        5
+      ]
+    },
+    {
+      "question": "รถจักรยานยนต์ส่วนบุคคลเบิกกิโลเมตรละเท่าไหร่",
+      "expected_phrase": "กิโลเมตรละ 2 บาท",
+      "expected_page": 5,
+      "retrieval_hit_at_6": true,
+      "status": "retrieval_only",
+      "retrieval": "keyword-tfidf",
+      "version_audit": [],
+      "source_pages": [
+        5,
+        5
+      ]
+    }
+  ],
+  "retrieval_hits_at_6": 11,
+  "total": 11,
+  "answer_accuracy": "not measured; requires independent answer review",
+  "current_policy_validity": "Historical integration/retrieval experiment only. Leave source 6/2565 is listed as cancelled in HR2 current index; do not treat prior answer as current rights."
+}

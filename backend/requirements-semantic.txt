@@ -1,0 +1,2 @@
+# Optional: E5 semantic retrieval; lexical search works with requirements-local.txt.
+sentence-transformers==5.6.0

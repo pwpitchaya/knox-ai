@@ -1,0 +1,46 @@
+{
+  "model": "gpt-4.1-mini",
+  "configured": true,
+  "live_answer_tested": true,
+  "status": "answered",
+  "answer": "พนักงานมหาวิทยาลัยต้องมีใบรับรองแพทย์เมื่อขอลาป่วยตั้งแต่ 3 วันขึ้นไป โดยใบรับรองแพทย์นั้นต้องเป็นของผู้ที่ขึ้นทะเบียนและได้รับใบอนุญาตประกอบวิชาชีพเวชกรรมแนบมากับใบลาป่วย ทั้งนี้ในกรณีจำเป็นหรือผู้มีอำนาจเห็นสมควร สามารถใช้ใบรับรองแพทย์คนอื่นที่ผู้มีอำนาจอนุญาตเห็นชอบแทนได้ [S1]",
+  "citations": [
+    "S1"
+  ],
+  "sources": [
+    {
+      "citation": "S1",
+      "title": "ประกาศ ก.บ.ม. มข. 6/2565 วัน เวลาปฏิบัติงาน การลา และการได้รับเงินเดือนระหว่างลาของพนักงานมหาวิทยาลัย",
+      "page": 3
+    },
+    {
+      "citation": "S2",
+      "title": "ประกาศ ก.บ.ม. มข. 6/2565 วัน เวลาปฏิบัติงาน การลา และการได้รับเงินเดือนระหว่างลาของพนักงานมหาวิทยาลัย",
+      "page": 3
+    },
+    {
+      "citation": "S3",
+      "title": "ประกาศ ก.บ.ม. มข. 6/2565 วัน เวลาปฏิบัติงาน การลา และการได้รับเงินเดือนระหว่างลาของพนักงานมหาวิทยาลัย",
+      "page": 4
+    },
+    {
+      "citation": "S4",
+      "title": "ประกาศ ก.บ.ม. มข. 6/2565 วัน เวลาปฏิบัติงาน การลา และการได้รับเงินเดือนระหว่างลาของพนักงานมหาวิทยาลัย",
+      "page": 3
+    },
+    {
+      "citation": "S5",
+      "title": "ประกาศ ก.บ.ม. มข. 6/2565 วัน เวลาปฏิบัติงาน การลา และการได้รับเงินเดือนระหว่างลาของพนักงานมหาวิทยาลัย",
+      "page": 3
+    },
+    {
+      "citation": "S6",
+      "title": "ประกาศ ก.บ.ม. มข. 6/2565 วัน เวลาปฏิบัติงาน การลา และการได้รับเงินเดือนระหว่างลาของพนักงานมหาวิทยาลัย",
+      "page": 4
+    }
+  ],
+  "expected_number_3_present": true,
+  "answer_needs_human_review": true,
+  "assistant_source_check": "Passed: day threshold and physician exception match reviewed clause 10.3, PDF page 3. Independent human review still recommended.",
+  "current_policy_validity": "Historical integration/retrieval experiment only. Leave source 6/2565 is listed as cancelled in HR2 current index; do not treat prior answer as current rights."
+}
