@@ -68,6 +68,9 @@ class AppTests(unittest.TestCase):
         identifier = uploaded.json()['id']
         self.assertEqual(self.question().json()['status'], 'insufficient_evidence')
         self.assertEqual(self.client.patch(f'/api/documents/{identifier}/review', json={'reviewed': True}).status_code, 200)
+        approval_log = self.client.get(f'/api/documents/{identifier}/approval-log').json()
+        self.assertEqual(approval_log[0]['action'], 'approve')
+        self.assertEqual(approval_log[0]['performed_by'], 'verify-user')
         with patch.dict(os.environ, {'OPENAI_API_KEY': '', 'OPENAI_MODEL': ''}):
             result = self.question().json()
         self.assertEqual(result['status'], 'retrieval_only')
@@ -170,6 +173,23 @@ class AppTests(unittest.TestCase):
             post.return_value.json.return_value=fake('เบิกได้ 3 บาท [S1]')
             with self.assertRaises(HTTPException):
                 knox.generate_answer('ทำงานมา 3 ปี เบิกได้เท่าไร','staff',[{'citation':'S1','text':'เบิกได้ 20 บาท'}],'2026-10-27')
+
+    def test_bare_tenure_echo_is_allowed_but_requested_day_rate_is_not(self):
+        import json
+        from fastapi import HTTPException
+
+        def fake(answer):
+            return {'output':[{'type':'message','content':[{'type':'output_text',
+                    'text':json.dumps({'status':'answered','answer':answer,'citations':['S1']})}]}]}
+
+        evidence = [{'citation':'S1','text':'ผู้เริ่มงานปีแรกไม่ครบ 6 เดือน ไม่มีสิทธิลาพักผ่อนประจำปี'}]
+        with patch('app.ai_config',return_value=('test-key','test-model')),patch('httpx.post') as post:
+            post.return_value.json.return_value = fake('ผู้ที่ทำงานเพียง 3 เดือน ยังไม่มีสิทธิลาพักผ่อนประจำปี [S1]')
+            result = knox.generate_answer('เริ่มงาน 3 เดือน มีสิทธิลาพักผ่อนประจำปีหรือยัง', 'staff', evidence, '2026-10-27')
+            self.assertEqual(result['status'], 'answered')
+            post.return_value.json.return_value = fake('ผู้เริ่มงาน 3 เดือน ลาได้ 999 วัน [S1]')
+            with self.assertRaises(HTTPException):
+                knox.generate_answer('เริ่มงาน 3 เดือน และลาได้ 999 วันไหม', 'staff', evidence, '2026-10-27')
 
     def test_credit_error_is_explained_without_credentials(self):
         import httpx

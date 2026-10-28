@@ -547,29 +547,27 @@ def _generate_once(question, personnel, sources, as_of, repair=False, forbidden_
             # A user's stated tenure is context, not a policy rate. Permit only
             # an exact repeated tenure phrase; never exempt currency/day limits.
             tenure_pattern=r'(?:อายุงาน|ทำงาน|ปฏิบัติงาน|เริ่มงาน|บรรจุ)(?:(?:ติดต่อกัน|มา|แล้ว|ประมาณ|เป็นเวลา|ได้|ยัง|ไม่ถึง|เกิน|เพียง|เพิ่ง|ในปีแรก)|\s){0,8}(\d+(?:\.\d+)?)\s*(ปี|เดือน)'
-            supplied_tenure={(m.group(1),m.group(2)) for m in re.finditer(r'(\d+(?:\.\d+)?)\s*(ปี|เดือน)',question.translate(digits))} if any(t in question for t in ['อายุงาน','ทำงาน','ปฏิบัติงาน','เริ่ม','บรรจุ']) else set()
+            question_text = question.translate(digits)
+            supplied_tenure = {(m.group(1), m.group(2))
+                               for m in re.finditer(tenure_pattern, question_text)}
             contextual=[]
             def omit_supplied_tenure(match):
                 if (match.group(1),match.group(2)) in supplied_tenure:
                     contextual.append(match.group(0));return re.sub(r'\d+(?:\.\d+)?','',match.group(0))
                 return match.group(0)
             clean=re.sub(tenure_pattern,omit_supplied_tenure,clean)
-            # Fallback: the tenure pattern requires specific Thai keywords in
-            # the answer.  When the AI echoes the user's duration with different
-            # wording (e.g. "เพียง 3 เดือน" instead of "เริ่มงาน 3 เดือน") those
-            # numbers survive the first pass.  Exempt any bare number+time-unit
-            # pair that appears identically in the question — the user stated
-            # it, so repeating it is not fabrication.
-            question_durations = {(m.group(1), m.group(2))
-                                 for m in re.finditer(r'(\d+(?:\.\d+)?)\s*(ปี|เดือน|วัน)',
-                                                      question.translate(digits))}
-            if question_durations:
+            # The answer may echo a verified tenure with different wording
+            # ("เพียง 3 เดือน" rather than "เริ่มงาน 3 เดือน").  Only remove a
+            # bare duration that matched the tenure pattern in the question;
+            # requested policy rates such as "999 วัน" remain subject to the
+            # evidence-number check.
+            if supplied_tenure:
                 def omit_question_duration(match):
-                    if (match.group(1), match.group(2)) in question_durations:
+                    if (match.group(1), match.group(2)) in supplied_tenure:
                         contextual.append(match.group(0))
                         return re.sub(r'\d+(?:\.\d+)?', '', match.group(0))
                     return match.group(0)
-                clean = re.sub(r'(\d+(?:\.\d+)?)\s*(ปี|เดือน|วัน)', omit_question_duration, clean)
+                clean = re.sub(r'(\d+(?:\.\d+)?)\s*(ปี|เดือน)', omit_question_duration, clean)
             if contextual:parsed['context_from_question']=contextual
             cited_text = ' '.join(s['text']+' '+s.get('title','')+' '+str(s.get('effective_from',''))
                                   for s in sources if s['citation'] in citations).translate(digits)
