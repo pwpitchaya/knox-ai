@@ -14,7 +14,7 @@ from pathlib import Path
 from typing import Literal
 from urllib.parse import urlparse
 
-from dotenv import load_dotenv, dotenv_values
+from dotenv import load_dotenv
 from fastapi import Depends, FastAPI, File, Form, HTTPException, Request, UploadFile, status as http_status
 from fastapi.openapi.docs import get_redoc_html, get_swagger_ui_html
 from fastapi.responses import FileResponse, JSONResponse, PlainTextResponse
@@ -188,14 +188,13 @@ initialize()
 
 
 def ai_config():
-    values = dotenv_values(ROOT / '.env')
-    return (values.get('OPENAI_API_KEY') or os.getenv('OPENAI_API_KEY'),
-            values.get('OPENAI_MODEL') or os.getenv('OPENAI_MODEL'))
+    # load_dotenv() above fills only missing entries. Reading os.environ here
+    # therefore keeps host-provided secrets/configuration ahead of .env values.
+    return (os.getenv('OPENAI_API_KEY'), os.getenv('OPENAI_MODEL'))
 
 
 def generation_enabled():
-    values = dotenv_values(ROOT / '.env')
-    return str(values.get('KNOX_GENERATION_ENABLED', os.getenv('KNOX_GENERATION_ENABLED','1'))).strip() == '1'
+    return env_enabled('KNOX_GENERATION_ENABLED', default=True)
 
 
 @app.middleware('http')
